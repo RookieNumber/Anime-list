@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import  AnimeList  from './component/AnimeList';
+import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client';
+import { ApolloProvider, useQuery } from '@apollo/client/react';
+
+
+
+//apollo client set up
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: "https://graphql.anilist.co",
+    fetchOptions: {
+      method: "POST"
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    }
+  })
+});
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+    <ApolloProvider client={client}>
+      <h3>List of everyDamn thing</h3>
+      <AnimeList/>
+    </ApolloProvider>
+   </>
   );
 }
 
 export default App;
+
