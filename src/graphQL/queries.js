@@ -12,6 +12,7 @@ export const LOAD_ANIME = gql`
                 coverImage {
                 large
                 }
+                genres
             }
             }
         }

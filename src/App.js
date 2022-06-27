@@ -1,7 +1,9 @@
-import  AnimeList  from './component/AnimeList';
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client';
-import { ApolloProvider, useQuery } from '@apollo/client/react';
-
+import {LandingPage} from './component/LandingPage';
+import  NavBar  from './component/Navbar';
+import { ApolloClient, HttpLink, InMemoryCache} from '@apollo/client';
+import { ApolloProvider} from '@apollo/client/react';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 
 //apollo client set up
@@ -24,8 +26,10 @@ function App() {
   return (
    <>
     <ApolloProvider client={client}>
-      <h3>List of everyDamn thing</h3>
-      <AnimeList/>
+      <NavBar/>
+      <Routes>
+        <Route path='/' element={<LandingPage/>} />
+      </Routes>
     </ApolloProvider>
    </>
   );
