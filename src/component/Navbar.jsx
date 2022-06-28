@@ -8,6 +8,7 @@ const Navi = styled.div`
              position: absolute;
              top: 0;
              left: 0;
+             z-index: 2;
 `
 
 const Logo = styled.button`
