@@ -16,8 +16,7 @@ const AnimeList = () => {
     useEffect(() => {
         if (data) {   
             console.log(data.Page)
-            setList(data.Page.media)
-           
+            setList(data.Page.media)   
         }
       }, [data])
 

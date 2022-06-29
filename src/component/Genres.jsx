@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 
 const Card = styled.div`
@@ -70,7 +71,9 @@ export const NodeGenres = ({item, index}) => {
         <>
             <Card key={index}>
             <Bnr>
-                <Banner src={item.coverImage.large} alt="" />
+                <Link to={`/detail/${item.id}`}>
+                    <Banner src={item.coverImage.large} alt="" />
+                </Link>
             </Bnr>
             <Txt>
                 <Title>{item.title.english}</Title>

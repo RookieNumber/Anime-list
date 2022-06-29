@@ -1,4 +1,5 @@
 import {LandingPage} from './component/LandingPage';
+import {Detail} from './component/Detail';
 import  NavBar  from './component/Navbar';
 import { ApolloClient, HttpLink, InMemoryCache} from '@apollo/client';
 import { ApolloProvider} from '@apollo/client/react';
@@ -23,12 +24,15 @@ const client = new ApolloClient({
 
 function App() {
 
+  
+
   return (
    <>
     <ApolloProvider client={client}>
       <NavBar/>
       <Routes>
         <Route path='/' element={<LandingPage/>} />
+        <Route path='/detail/:animeId' element={<Detail/>} />
       </Routes>
     </ApolloProvider>
    </>
