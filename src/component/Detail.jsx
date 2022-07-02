@@ -8,8 +8,11 @@ import { CollectionModal } from './CollectionModal'
 export const Bg = styled.div`
     background-color: #2C2C2C;
     position: absolute;
+    padding-bottom: 5%;
+    top: 0;
     width: 100%;
-    height: 100%;
+    height: 150%;
+    font-family: 'PT Sans', sans-serif;
     left: 0;
     display: block;
 `
@@ -17,18 +20,19 @@ const Banner = styled.div`
     width: 100%;
     height: max-content;
     position: relative;
-    top: 40px;
+    top: 50px;
 `
 
 const BannerImg = styled.img`
     width: 100%;
+    height: 400px;
 `
 const BannerCover = styled.img`
     width: 200px;
     z-index: 1;
     position: absolute;
     bottom: -50%;
-    margin-left: 50px;
+    margin-left: 10%;
     left: 0;
     border: 2px solid white;
 `
@@ -38,28 +42,39 @@ const Title = styled.a`
     position: relative;
     top: 0;
     left: ;
-    color: white;
+    color: #C5FF0E;
     z-index: 2;
+    width: max-width;
 `
 const DetailText = styled.div`
-    position: relative;
-    width: 100%;
-    height: auto;
+    position: absolute;
+    padding: 5% 25%;
+    width: max-width;
+    height: max-height;
     display: block;
 `
 const MoreDetail = styled.a`
-    font-size: 20px;
-    color: white;
+    font-size: 18px;
+    color: #C5FF0E;
 `
 const ConText = styled.div`
-    width: 500px;
-    background-color: blue;
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
 
 `
 const Button = styled.button`
-    background-color: red;
+    background-color: black;
+    position: relative;
+    margin: 2% 2% 20% 10%;
     padding: 10px;
+    height: min-content;
     color: white;
+    &:hover {
+        cursor: pointer;
+        border: 1px solid #C5FF0E;
+        transition: 0.2s;
+    }
 `
 
 export const On = styled.div`
@@ -81,10 +96,11 @@ export const Detail = () => {
 
     useEffect(() => {
         if(data) {
-            console.log(data)
+            
              setDetail(data.Media)
              setTitle(data.Media.title)
              setCover(data.Media.coverImage)
+             console.log(data.Media)
         }
     }, [data])
 
@@ -100,13 +116,14 @@ export const Detail = () => {
                 <Title>{title.english}</Title>
                <ConText>
                     <MoreDetail>{detail.description}</MoreDetail>
+                    <Button onClick={showModal}>
+                    Add to Collection
+                    </Button>
                </ConText>
-               <Button onClick={showModal}>
-                    Create Collection +
-               </Button>
             </DetailText>
             {modal ? <On><CollectionModal data={detail}/></On> : <Off></Off>}
         </Bg>
+
         </>
     
   )

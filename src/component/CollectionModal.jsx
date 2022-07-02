@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Container = styled.div`
     width: min-content;
     height: min-content;
-    background-color: grey;
+    background-color: black;
+    z-index: 5;
     position: fixed;
+    font-family: 'PT Sans', sans-serif;
     top: 300px;
     left: 40%;
     padding-right: 10px;
@@ -28,7 +30,7 @@ const Label = styled.label`
 `
 const List = styled.ul`
     width: 200px;
-    height: auto;
+    height: max-content;
     list-style: none;
     position: relative;
     left: -20px;
@@ -38,7 +40,6 @@ const ListItem = styled.li`
     position: relative;
     left: 0;
     color: white;
-    border-bottom: 0.2px solid white;
 `
 const Add = styled.button`
     width: min-content;
@@ -60,16 +61,20 @@ const AddList = styled.div`
     margin-bottom: 20px;
 `
 const AddButton = styled.button`
-    background-color: blue;
-    color: white;
+    background-color: black;
+    color: #C5FF0E;
     border: none;
     padding: 10px 20px 10px;
     margin-left: 21%;
     margin-bottom: 20px;
+    &:hover {
+        cursor: pointer;
+    }
 `
 const Adding = styled.button`
     margin-top: 10px;
     padding: 5px 10px 5px;
+    
 `
 const CollectionList = [
     {
@@ -100,11 +105,17 @@ export const CollectionModal = ({ data }) => {
         a.push(
             {
                 id: data.id,
-                title: data.title.english
+                title: data.title.english,
+                coverImage: data.coverImage.large,
+                bannerImage: data.bannerImage,
+                description: data.description,
+                genres: data.genres
+
             }
         );
                 
         localStorage.setItem(`${title}`, JSON.stringify(a))
+        console.log(a)
     }
 
     const addToCollection = (item) => {
@@ -115,7 +126,11 @@ export const CollectionModal = ({ data }) => {
         b.push(
             {
                 id: data.id,
-                title: data.title.english
+                title: data.title.english,
+                coverImage: data.coverImage.large,
+                bannerImage: data.bannerImage,
+                description: data.description,
+                genres: data.genres
             }
         )
 
@@ -145,7 +160,7 @@ export const CollectionModal = ({ data }) => {
                     <ListItem key={index}>
                         {item}
                         <Add>
-                            <FontAwesomeIcon onClick={() => addToCollection(item)} icon={faPlusSquare}/>
+                            <FontAwesomeIcon style={{color: '#C5FF0E'}} onClick={() => addToCollection(item)} icon={faPlusSquare}/>
                         </Add>
                     </ListItem>
                 )
@@ -158,13 +173,13 @@ export const CollectionModal = ({ data }) => {
                 <Input placeholder='Collection' type='text' name="Name" onChange={e => setTitle(e.target.value)}></Input>
             </Form>
             <Adding onClick={() => createCollection()} >
-                Tambah
+                Create
             </Adding>
         </AddList>
         :
         <AddItem>
             <AddButton onClick={showAdd}>
-                Tambah disini
+                Create Collection
             </AddButton>
         </AddItem>}
     </Container>

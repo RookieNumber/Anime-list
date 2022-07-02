@@ -8,11 +8,13 @@ const Container = styled.div`
   width: 200px;
   height: 100%;
   background-color: black;
+  font-family: 'PT Sans', sans-serif;
   z-index: 3;
   position: fixed;
   left: 0;
   top: 50px;
   padding-top: 100px;
+  transition: 0.3s;
 `
 const Collection = styled.div`
   width: 100%;
@@ -21,9 +23,9 @@ const Collection = styled.div`
 const Button = styled.button`
   background-color: transparent;
   border: none;
-  color: white;
   padding: 10px 20px 10px;
   outline: none;
+  color: #C5FF0E;
   &:hover {
     cursor: pointer;
   }
@@ -32,7 +34,6 @@ const List = styled.ul`
   width: 100%;
 `
 const ListItem = styled.li`
-  color: white;
   list-style: none;
   margin-bottom: 10px;
 `

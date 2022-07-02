@@ -43,3 +43,22 @@ export const GET_ANIME_DETAIL = gql`
             }
         }
 `
+// export const GET_MULTIPLE_ANIME = gql`
+//         query ($id: Int) {
+//             Media (id: $id, type: ANIME) {
+//                 id
+//             title {
+//             romaji
+//             english
+//             native
+//             }
+//             bannerImage
+//             coverImage {
+//             large
+//             }
+//             genres
+//             description
+//             }
+//             }
+//         }
+// `

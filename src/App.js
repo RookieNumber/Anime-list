@@ -9,7 +9,7 @@ import { CollectionPage } from './component/CollectionPage';
 
 
 //apollo client set up
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: "https://graphql.anilist.co",
