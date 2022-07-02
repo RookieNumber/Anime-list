@@ -10,7 +10,7 @@ import { NodeGenres } from './Genres'
 
 const AnimeList = () => {
    
-    const {error, loading, data} = useQuery(LOAD_ANIME)
+    const {error, loading, data} = useQuery(LOAD_ANIME, {variables: {"page": 1, "perPage": 10}})
     const [list, setList] = useState([])
 
     useEffect(() => {

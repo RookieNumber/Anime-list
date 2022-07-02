@@ -3,17 +3,19 @@ import styled from '@emotion/styled'
 import { useParams } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
 import { GET_ANIME_DETAIL } from '../graphQL/queries'
+import { CollectionModal } from './CollectionModal'
 
-const Bg = styled.div`
+export const Bg = styled.div`
     background-color: #2C2C2C;
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
+    display: block;
 `
 const Banner = styled.div`
     width: 100%;
-    height: auto;
+    height: max-content;
     position: relative;
     top: 40px;
 `
@@ -25,7 +27,7 @@ const BannerCover = styled.img`
     width: 200px;
     z-index: 1;
     position: absolute;
-    top: 40vh;
+    bottom: -50%;
     margin-left: 50px;
     left: 0;
     border: 2px solid white;
@@ -42,9 +44,8 @@ const Title = styled.a`
 const DetailText = styled.div`
     position: relative;
     width: 100%;
-    background-color: red;
     height: auto;
-    top: 50px;
+    display: block;
 `
 const MoreDetail = styled.a`
     font-size: 20px;
@@ -55,6 +56,18 @@ const ConText = styled.div`
     background-color: blue;
 
 `
+const Button = styled.button`
+    background-color: red;
+    padding: 10px;
+    color: white;
+`
+
+export const On = styled.div`
+    visibility: visible;
+`
+export const Off = styled.div`
+    visibility: hidden;
+`
 
 export const Detail = () => {
 
@@ -63,6 +76,8 @@ export const Detail = () => {
     const [detail, setDetail] = useState([])
     const [title, setTitle] = useState([])
     const [cover, setCover] = useState([])
+    const [modal, setModal] = useState(null)
+    const showModal = () => setModal(!modal)
 
     useEffect(() => {
         if(data) {
@@ -72,6 +87,7 @@ export const Detail = () => {
              setCover(data.Media.coverImage)
         }
     }, [data])
+
 
   return (
         <>
@@ -83,10 +99,13 @@ export const Detail = () => {
             <DetailText>
                 <Title>{title.english}</Title>
                <ConText>
-                    
                     <MoreDetail>{detail.description}</MoreDetail>
                </ConText>
+               <Button onClick={showModal}>
+                    Create Collection +
+               </Button>
             </DetailText>
+            {modal ? <On><CollectionModal data={detail}/></On> : <Off></Off>}
         </Bg>
         </>
     

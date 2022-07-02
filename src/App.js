@@ -5,6 +5,7 @@ import { ApolloClient, HttpLink, InMemoryCache} from '@apollo/client';
 import { ApolloProvider} from '@apollo/client/react';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { CollectionPage } from './component/CollectionPage';
 
 
 //apollo client set up
@@ -24,7 +25,6 @@ const client = new ApolloClient({
 
 function App() {
 
-  
 
   return (
    <>
@@ -33,6 +33,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage/>} />
         <Route path='/detail/:animeId' element={<Detail/>} />
+        <Route path='/collection/:collectionName' element={<CollectionPage/>} />
       </Routes>
     </ApolloProvider>
    </>

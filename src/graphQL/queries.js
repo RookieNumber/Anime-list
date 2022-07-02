@@ -1,9 +1,16 @@
 import { gql } from "@apollo/client/core";
 
 export const LOAD_ANIME = gql`
-        query {
-            Page {
-            media(isAdult: false, sort: POPULARITY_DESC) {
+        query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+            Page (page: $page, perPage: $perPage) {
+            pageInfo {
+                total
+                currentPage
+                lastPage
+                hasNextPage
+                perPage
+            }
+            media (id: $id, search: $search) {
                 id
                 title {
                 romaji
@@ -13,7 +20,6 @@ export const LOAD_ANIME = gql`
                 large
                 }
                 genres
-                
             }
             }
         }
