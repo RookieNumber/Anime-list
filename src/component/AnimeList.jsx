@@ -113,6 +113,7 @@ const Node = styled.li`
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 15px;
+    margin: 5px;
     color: white;
     ${mq[1]} {
         display: inline-block;

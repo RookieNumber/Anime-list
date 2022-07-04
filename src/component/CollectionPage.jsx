@@ -126,6 +126,9 @@ export const Delete = styled.button`
     &:hover {
         cursor: pointer;
     }
+    position: absolute;
+    right: 0;
+    top: 40px;
 `
 export const Confirmed = styled.div`
     width: max-content;

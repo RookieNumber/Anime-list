@@ -54,9 +54,11 @@ export const AllCollection = () => {
                 {collection.map((item, index) => {
                         return (
                             <ListItem key={index}>
-                                <Text>
-                                    <Name>{item}</Name>
-                                </Text>
+                                <Link style={{textDecoration: 'none'}} to={`/collection/${item}`}>
+                                    <Text>
+                                        <Name>{item}</Name>
+                                    </Text>
+                                </Link>
                                 <Delete onClick={() => deleteItem(item)}>
                                     <FontAwesomeIcon icon={faTrash}/>
                                 </Delete>
