@@ -12,7 +12,7 @@ const Bg = styled.div`
 `
 const Cn = styled.div`
       width: max-width;
-      margin-left: 30%;
+      margin-left: 15%;
       margin-top: 50px;
       display: table;
 `

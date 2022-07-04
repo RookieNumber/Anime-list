@@ -1,10 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import { useQuery } from '@apollo/client/react'
+import { useQuery } from '@apollo/client'
 import { LOAD_ANIME } from '../graphQL/queries'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Card = styled.div`
+const ListAnime = styled.ul`
+    column-count: 2;
+    position: relative;
+    left: 0;
+`
+
+const Card = styled.li`
     width: 600px;
     background-color: black;
     font-size: 24px;
@@ -63,24 +70,62 @@ const Node = styled.div`
     font-size: 15px;
     color: white;
 `
+const Button = styled.button`
+    background-color: black;
+    color: #C5FF0E;
+    font-size: 17px;
+    font-weight: 200;
+    &:hover {
+        cursor: pointer;
+        background-color: #C5FF0E;
+        color: black;
+    }
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+`
+const PageNumber = styled.a`
+    color: #C5FF0E;
+    font-size: 17px;
+    font-weight: 200;
+    position: relative;
+`
+const BtnContainer = styled.div`
+    width: max-content;
+    display: flex;
+    position: relative;
+    left: -80px;
+`
+
+
 
 const AnimeList = () => {
-   
-    const {error, loading, data, fetchMore} = useQuery(LOAD_ANIME, {variables: {"page": 1, "perPage": 10}})
-    const [list, setList] = useState([])
-    const [page, setPage] = useState()
+    
+    const [page, setPage] = useState(1)
 
-    useEffect(() => {
-        if (data) {   
-            console.log(data.Page)
-            setList(data.Page.media)   
-        }
-      }, [data])
+    const {error, loading, data} = useQuery(LOAD_ANIME, {variables: {"page": page, "perPage": 10}})
+    
+    if (loading) {
+        return <div>Loading</div>
+      }
+    
+      if (error) {
+        return <div>{error.message}</div>
+      }
+
+    // useEffect(() => {
+    //     if (data) {   
+    //         console.log(data.Page)
+    //         setList(data.Page.media)   
+    //     }
+    //   }, [data])
+
+    console.log(page)
 
   return ( 
     <>
-    <ul>
-        {list.map((item, index) => {
+    <ListAnime>
+        {data.Page.media.map((item, index) => {
             return (
                 <Card key={index}>
                     <Bnr>
@@ -109,7 +154,12 @@ const AnimeList = () => {
                 </Card>
             )
         })}
-    </ul>
+    <BtnContainer>
+        <Button onClick={() => setPage((event) => event - 1)}>Prev</Button>
+        <PageNumber>{page}</PageNumber>
+        <Button onClick={() => setPage((event) => event + 1)}>Next</Button>
+    </BtnContainer>
+    </ListAnime>
     </>
   )
 

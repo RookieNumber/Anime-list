@@ -37,6 +37,11 @@ const ListItem = styled.li`
   list-style: none;
   margin-bottom: 10px;
 `
+const ListItem2 = styled.li`
+  list-style: none;
+  margin-bottom: 10px;
+  width: 100%;
+`
 
 const Title = styled.a`
   margin-right: 40px;
@@ -76,15 +81,22 @@ export const SideNav = () => {
           <List>
           {collection.map((item, index) => {
             return (
-              <ListItem key={index}>
+                <ListItem key={index}>
                 <Link to={`/collection/${item}`}>
                   <Button>{item}</Button>
                 </Link>
-              </ListItem>
-              
+                </ListItem>
             )
           })}
-          </List></On> : <Off></Off>}
+          </List>
+          <ListItem2>
+                 <Link to={`/collection/All`}>
+                  <Button>
+                  All List
+                  </Button>
+                 </Link>
+          </ListItem2>
+          </On> : <Off></Off>}
           <Button>
             <Title>Create Collection</Title>
             <FontAwesomeIcon icon={faPlus}/>

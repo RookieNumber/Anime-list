@@ -89,10 +89,11 @@ const CollectionList = [
 ]
 
 
-export const CollectionModal = ({ data }) => {
+export const CollectionModal = ({ data, modal, setClose }) => {
     
     const [add, setAdd] = useState(false)
     const showAdd = () => setAdd(!add)
+  
     const [title, setTitle] = useState("")
     const [collection, setCollection] = useState([])
 
@@ -137,7 +138,8 @@ export const CollectionModal = ({ data }) => {
         localStorage.setItem(`${item}`, JSON.stringify(b))
 
         console.log(b)
-        
+
+        setClose(!modal)
     }
 
     useEffect(() => {

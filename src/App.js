@@ -6,6 +6,7 @@ import { ApolloProvider} from '@apollo/client/react';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { CollectionPage } from './component/CollectionPage';
+import { AllCollection } from './component/AllCollection';
 
 
 //apollo client set up
@@ -34,6 +35,7 @@ function App() {
         <Route path='/' element={<LandingPage/>} />
         <Route path='/detail/:animeId' element={<Detail/>} />
         <Route path='/collection/:collectionName' element={<CollectionPage/>} />
+        <Route path='/collection/All' element={<AllCollection/>} />
       </Routes>
     </ApolloProvider>
    </>

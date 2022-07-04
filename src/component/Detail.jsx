@@ -11,7 +11,7 @@ export const Bg = styled.div`
     padding-bottom: 5%;
     top: 0;
     width: 100%;
-    height: 150%;
+    height: auto;
     font-family: 'PT Sans', sans-serif;
     left: 0;
     display: block;
@@ -30,7 +30,7 @@ const BannerImg = styled.img`
 const BannerCover = styled.img`
     width: 200px;
     z-index: 1;
-    position: absolute;
+    position: relative;
     bottom: -50%;
     margin-left: 10%;
     left: 0;
@@ -47,7 +47,7 @@ const Title = styled.a`
     width: max-width;
 `
 const DetailText = styled.div`
-    position: absolute;
+    position: relative;
     padding: 5% 25%;
     width: max-width;
     height: max-height;
@@ -91,7 +91,7 @@ export const Detail = () => {
     const [detail, setDetail] = useState([])
     const [title, setTitle] = useState([])
     const [cover, setCover] = useState([])
-    const [modal, setModal] = useState(null)
+    const [modal, setModal] = useState(false)
     const showModal = () => setModal(!modal)
 
     useEffect(() => {
@@ -121,7 +121,7 @@ export const Detail = () => {
                     </Button>
                </ConText>
             </DetailText>
-            {modal ? <On><CollectionModal data={detail}/></On> : <Off></Off>}
+            {modal ? <On><CollectionModal data={detail} modal={modal} setClose={setModal}/></On> : <Off></Off>}
         </Bg>
 
         </>

@@ -1,41 +1,49 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
-import { Bg } from './Detail'
+import { On, Off } from './Detail'
 import { useQuery } from '@apollo/client'
 import { GET_ANIME_DETAIL, LOAD_ANIME } from '../graphQL/queries'
 import { client } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faTrash, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
-const Container = styled.div`
-    width: 200px;
-    height: 200px;
+export const Bg = styled.div`
+    background-color: #2C2C2C;
     position: absolute;
+    width: 100%;
+    height: max-content;
+    font-family: 'PT Sans', sans-serif;
+    left: 0;
+    display: flex;
+    padding-bottom: 200px;
+`
+export const Container = styled.div`
+    width: 200px;
+    height: auto;
+    position: relative;
     top: 100px;
     left: 400px;
 `
-const Collection = styled.div`
+export const Collection = styled.div`
     width: 200px;
-    height: 100%;
-    position: absolute;
+    position: relative;
     top: 50px;
     left: 200px;
     color: white;
     color: #C5FF0E;
-    border-right: 1px solid #C5FF0E;
-    border-left: 1px solid #C5FF0E;
 `
-const CollectionName = styled.h2`
+export const CollectionName = styled.h2`
     margin-left: 10px;
     color: white;
 `
-const Border = styled.div`
+export const Border = styled.div`
     top: 40px;
     border-bottom: 1px solid #C5FF0E;
     position: absolute;
     left: 0;
+    height: max-auto;
     width: 100%;
     display: flex;
 `
@@ -52,36 +60,79 @@ const Button = styled.button`
         cursor: pointer;
     }
 `
-const CollectionList = styled.ul`
+export const CollectionList = styled.ul`
+    position: relative;
+    height: max-content;
+    padding-bottom: 200px;
 `
-const ListTitle = styled.h2`
+export const ListTitle = styled.h2`
     color: white;
 `
 
-const ListItem = styled.li`
+export const ListItem = styled.li`
     width: 600px;
     height: 100px;
     margin-bottom: 19px;
     list-style: none;
     padding: 5px 20px 10px 20px ;
     display: flex;
+    position: relative;
 `
-const Text = styled.div`
+export const Text = styled.div`
     width: 100%;
     position: relative;
     top: 0;
-    padding-top: 20px;
+    // padding-top: 20px;
 `
-const Title = styled.a`
+export const Title = styled.a`
     color: #C5FF0E;
     font-size: 15px;
     font-weight: 500;
     margin-left: 20px;
     
 `
-const CoverImg = styled.img`
+export const CoverImg = styled.img`
     height: 100%;
     border: 1px solid #C5FF0E;
+`
+export const Delete = styled.button`
+    background-color: transparent;
+    color: #C5FF0E;
+    border: none;
+    &:hover {
+        cursor: pointer;
+    }
+`
+export const Confirmed = styled.div`
+    width: max-content;
+    background-color: black;
+    height: max-content;
+    position: fixed;
+    top: 100px;
+    right: 200px;
+    display: flex;
+`
+export const DeleteText = styled.a`
+    color: white;
+    font-size: 13px;
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+`
+export const ButtonDel = styled.button`
+    background-color: transparent;
+    border: none;
+    position: relative;
+    top: 0;
+    right: 0;
+    color: red;
+    height: auto;
+    width: auto;
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 
@@ -91,7 +142,31 @@ export const CollectionPage = () => {
     // const {data} = useQuery(GET_ANIME_DETAIL, {variables: {"id": }})
     const {collectionName} = useParams()
     const [list, setList] = useState([])
+    const [del, setDel] = useState(false)
+    const showDel = () => setDel(!del)
+    const hideDel = () => setDel(false)
     const [anime, setAnime] = useState([])
+
+    function deleteItem(a) {
+        // var koleksi = JSON.parse(localStorage.getItem(`${collectionName}`))
+        var value = JSON.parse(localStorage[`${collectionName}`])
+        for (var i = 0; i < value.length; i++){
+            if(value[i].id === a){
+                value.splice(i,1);
+                setList(value)
+                showDel()
+                break;
+            }
+        }
+
+        value = JSON.stringify(value);
+        localStorage.setItem(`${collectionName}`, value)
+        // console.log(value)
+    }
+
+    useEffect(() => {
+        setTimeout(setDel(false), 1000);
+    }, [])
 
     useEffect(() => {
         const DataCollection = JSON.parse(localStorage.getItem(`${collectionName}`))
@@ -99,7 +174,7 @@ export const CollectionPage = () => {
         
         console.log(DataCollection)
        
-    }, [])
+    }, [collectionName])
 
   return (
     <Bg>
@@ -123,11 +198,24 @@ export const CollectionPage = () => {
                                 <Text>
                                     <Title>{item.title}</Title>
                                 </Text>
+                                <Delete onClick={() => deleteItem(item.id)}>
+                                    <FontAwesomeIcon icon={faTrash}/>
+                                </Delete>
                             </ListItem>
                         )
                     })}
             </CollectionList>
         </Container>
+        {del ? <On>
+            <Confirmed>
+                <DeleteText>
+                    Anime is deleted from this list
+                </DeleteText>
+                <ButtonDel onClick={hideDel}>
+                    <FontAwesomeIcon icon={faSquareXmark} size="3x"/>
+                </ButtonDel>
+            </Confirmed></On>
+            : <Off></Off>}
     </Bg>
   )
 }
