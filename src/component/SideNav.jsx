@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { CollectionModal } from './CollectionModal'
 import { Link } from 'react-router-dom'
+import { AddCollection } from './AddCollection'
 
 const Container = styled.div`
   width: 200px;
@@ -59,16 +61,18 @@ export const SideNav = () => {
   const [list, setList] = useState(false)
   const showList = () => setList(!list)
   const [collection, setCollection] = useState([])
+  const [modal, setModal] = useState(false)
+  const showModal = () => setModal(!modal)
+  const keys = Object.keys(localStorage);
 
   useEffect(() => {
     const getAllKey = () => {
-      const keys = Object.keys(localStorage);
       setCollection(keys)
   }
 
   getAllKey()
 
-  }, [])
+  }, [keys])
 
   return (
     <Container>
@@ -97,11 +101,12 @@ export const SideNav = () => {
                  </Link>
           </ListItem2>
           </On> : <Off></Off>}
-          <Button>
+          <Button onClick={showModal}>
             <Title>Create Collection</Title>
             <FontAwesomeIcon icon={faPlus}/>
           </Button>
       </Collection>
+      {modal ? <On><AddCollection modal={modal} setClose={setModal}/></On> : <Off></Off>}
     </Container>
   )
 }

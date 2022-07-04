@@ -30,7 +30,7 @@ const BannerImg = styled.img`
 const BannerCover = styled.img`
     width: 200px;
     z-index: 1;
-    position: relative;
+    position: absolute;
     bottom: -50%;
     margin-left: 10%;
     left: 0;
@@ -47,7 +47,8 @@ const Title = styled.a`
     width: max-width;
 `
 const DetailText = styled.div`
-    position: relative;
+    position: absolute;
+    top: 400px;
     padding: 5% 25%;
     width: max-width;
     height: max-height;

@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import styled from '@emotion/styled'
 import { Collection, Border, CollectionName, CollectionList, 
-    ListTitle, ListItem, CoverImg, Title, Text, Delete, Bg} from './CollectionPage'
+    ListTitle, ListItem, CoverImg, Title, Text, Delete, Bg,
+    Confirmed, DeleteText, ButtonDel} from './CollectionPage'
+import { On, Off } from './Detail'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.div`
     width: 200px;
@@ -22,34 +24,30 @@ export const AllCollection = () => {
 
   const [list, setList] = useState(false)
   const showList = () => setList(!list)
+  const [del, setDel] = useState(false)
+    const showDel = () => setDel(!del)
+    const hideDel = () => setDel(false)
   const [collection, setCollection] = useState([])
+  const keys = Object.keys(localStorage);
 
-//   function deleteItem(a) {
-//     // var koleksi = JSON.parse(localStorage.getItem(`${collectionName}`))
-//     var value = JSON.parse(localStorage[`${collectionName}`])
-//     for (var i = 0; i < value.length; i++){
-//         if(value[i].id === a){
-//             value.splice(i,1);
-//             setList(value)
-//             showDel()
-//             break;
-//         }
-//     }
-
-//     value = JSON.stringify(value);
-//     localStorage.setItem(`${collectionName}`, value)
-//     // console.log(value)
-// }
+  function deleteItem(a) {
+    localStorage.removeItem(a)
+    
+    if (keys) {
+        showDel()
+        setList(keys)
+    }
+    // console.log(value)
+}
 
   useEffect(() => {
     const getAllKey = () => {
-      const keys = Object.keys(localStorage);
       setCollection(keys)
   }
 
   getAllKey()
 
-  }, [])
+  }, [keys])
 
   return (
     <Bg>
@@ -67,7 +65,7 @@ export const AllCollection = () => {
                                 <Text>
                                     <Name>{item}</Name>
                                 </Text>
-                                <Delete>
+                                <Delete onClick={() => deleteItem(item)}>
                                     <FontAwesomeIcon icon={faTrash}/>
                                 </Delete>
                             </ListItem>
@@ -75,6 +73,16 @@ export const AllCollection = () => {
                     })}
             </CollectionList>
         </Container>
+        {del ? <On>
+            <Confirmed>
+                <DeleteText>
+                    Collection is deleted from this list
+                </DeleteText>
+                <ButtonDel onClick={hideDel}>
+                    <FontAwesomeIcon icon={faSquareXmark} size="3x"/>
+                </ButtonDel>
+            </Confirmed></On>
+            : <Off></Off>}
     </Bg>
   )
 }

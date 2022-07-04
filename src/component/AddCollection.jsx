@@ -47,7 +47,7 @@ const Add = styled.button`
     border: none;
     background-color: transparent;
     position: absolute;
-    right: 20px;
+    right: 0;
     &:hover {
         cursor: pointer;
     }
@@ -85,17 +85,6 @@ const Adding = styled.button`
     }
     
 `
-const CollectionList = [
-    {
-        name: "My-List1"
-    },
-    {
-        name: "My-List2"
-    },
-    {
-        name: "My-List3"
-    }
-]
 
 const Button = styled.button`
     background-color: transparent;
@@ -109,7 +98,7 @@ const Button = styled.button`
 `
 
 
-export const CollectionModal = ({ data, modal, setClose }) => {
+export const AddCollection = ({modal, setClose }) => {
     
     const [add, setAdd] = useState(false)
     const showAdd = () => setAdd(!add)
@@ -126,46 +115,11 @@ export const CollectionModal = ({ data, modal, setClose }) => {
 
         a = JSON.parse(localStorage.getItem(`${title}`)) || [];
 
-        a.push(
-            {
-                id: data.id,
-                title: data.title.english,
-                coverImage: data.coverImage.large,
-                bannerImage: data.bannerImage,
-                description: data.description,
-                genres: data.genres
-
-            }
-        );
-                
         localStorage.setItem(`${title}`, JSON.stringify(a))
         console.log(a)
         setCollection(keys)
         hideAdd()
 
-    }
-
-    const addToCollection = (item) => {
-
-        var b = [];
-        b = JSON.parse(localStorage.getItem(`${item}`)) || [];
-
-        b.push(
-            {
-                id: data.id,
-                title: data.title.english,
-                coverImage: data.coverImage.large,
-                bannerImage: data.bannerImage,
-                description: data.description,
-                genres: data.genres
-            }
-        )
-
-        localStorage.setItem(`${item}`, JSON.stringify(b))
-
-        console.log(b)
-
-        setClose(!modal)
     }
 
     useEffect(() => {
@@ -186,9 +140,6 @@ export const CollectionModal = ({ data, modal, setClose }) => {
                 return (
                     <ListItem key={index}>
                         {item}
-                        <Add>
-                            <FontAwesomeIcon style={{color: '#C5FF0E'}} onClick={() => addToCollection(item)} icon={faPlusSquare}/>
-                        </Add>
                     </ListItem>
                 )
             })}
