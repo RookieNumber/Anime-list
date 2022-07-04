@@ -46,8 +46,8 @@ export const Collection = styled.div`
     color: white;
     color: #C5FF0E;
     ${mq[1]} {
-        top: 0;
-        left: 0;
+        top: 20px;
+        left: 20px;
     }
 `
 export const CollectionName = styled.h2`
@@ -79,10 +79,14 @@ const Button = styled.button`
 export const CollectionList = styled.ul`
     position: relative;
     height: max-content;
-    padding-bottom: 200px;
+    ${mq[1]} {
+        position: relative;
+        top: 200px;
+    }
 `
 export const ListTitle = styled.h2`
     color: white;
+
 `
 
 export const ListItem = styled.li`
@@ -93,6 +97,10 @@ export const ListItem = styled.li`
     padding: 5px 20px 10px 20px ;
     display: flex;
     position: relative;
+    border-bottom:  1px solid #C5FF0E;
+    ${mq[1]} {
+        width: 300px;
+    }
 `
 export const Text = styled.div`
     width: 100%;
@@ -127,6 +135,11 @@ export const Confirmed = styled.div`
     top: 100px;
     right: 200px;
     display: flex;
+    ${mq[1]} {
+        position: fixed;
+        top: 50px;
+        right: 0;
+    }
 `
 export const DeleteText = styled.a`
     color: white;

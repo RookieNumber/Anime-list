@@ -1,20 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import styled from '@emotion/styled'
 import { Collection, Border, CollectionName, CollectionList, 
-    ListTitle, ListItem, CoverImg, Title, Text, Delete, Bg,
+    ListTitle, ListItem, CoverImg, Container, Title, Text, Delete, Bg,
     Confirmed, DeleteText, ButtonDel} from './CollectionPage'
 import { On, Off } from './Detail'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
-
-const Container = styled.div`
-    width: 200px;
-    height: auto;
-    position: relative;
-    top: 100px;
-    left: 400px;
-`
 
 const Name = styled.h3`
     color: white;
