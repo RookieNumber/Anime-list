@@ -17,6 +17,7 @@ const Container = styled.div`
     padding-right: 10px;
     padding-top: 10px;
     display: ;
+    border: 2px solid #C5FF0E;
 
 `
 const Form = styled.form`
