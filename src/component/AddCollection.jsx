@@ -5,6 +5,12 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 
+const Breakpoints = [576, 768, 992, 1200, 2000]
+const mq = Breakpoints.map(
+    bp => `@media (max-width: ${bp}px)`
+  )
+
+
 const Container = styled.div`
     width: min-content;
     height: min-content;
@@ -18,6 +24,12 @@ const Container = styled.div`
     padding-top: 10px;
     display: ;
     border: 2px solid #C5FF0E;
+    ${mq[1]} {
+        width: 100%
+        position: fixed;
+        left: 23%;
+        top: 30%;
+    }
 
 `
 const Form = styled.form`

@@ -1,6 +1,7 @@
 import React from 'react'
 import AnimeList from './AnimeList'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 const Bg = styled.div`
       background-color: #2C2C2C;
@@ -24,9 +25,7 @@ export const LandingPage = () => {
       <Cn>
         <AnimeList/>
       </Cn>
-    </Bg>
-      
+    </Bg>  
    </>
-
   )
 }

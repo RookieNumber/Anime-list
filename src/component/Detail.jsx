@@ -5,6 +5,12 @@ import { useQuery, gql } from '@apollo/client'
 import { GET_ANIME_DETAIL } from '../graphQL/queries'
 import { CollectionModal } from './CollectionModal'
 
+const Breakpoints = [576, 768, 992, 1200, 2000]
+const mq = Breakpoints.map(
+    bp => `@media (max-width: ${bp}px)`
+  )
+
+
 export const Bg = styled.div`
     background-color: #2C2C2C;
     position: absolute;
@@ -35,6 +41,11 @@ const BannerCover = styled.img`
     margin-left: 10%;
     left: 0;
     border: 2px solid white;
+    ${mq[1]} {
+        position: absolute;
+        margin-left: 30%;
+        bottom: -20%;
+    }
 `
 
 const Title = styled.a`
@@ -53,6 +64,11 @@ const DetailText = styled.div`
     width: max-width;
     height: max-height;
     display: block;
+    ${mq[1]} {
+        position: absolute;
+        top: 530px;
+        display: block;
+    }
 `
 const MoreDetail = styled.a`
     font-size: 18px;
@@ -75,6 +91,12 @@ const Button = styled.button`
         cursor: pointer;
         border: 1px solid #C5FF0E;
         transition: 0.2s;
+    }
+    ${mq[1]} {
+        position: absolute;
+        margin-left: 0;
+        bottom: -30%;
+        left: 35%;
     }
 `
 

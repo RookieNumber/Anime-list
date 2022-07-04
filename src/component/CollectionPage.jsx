@@ -9,6 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faTrash, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
+const Breakpoints = [576, 768, 992, 1200, 2000]
+const mq = Breakpoints.map(
+    bp => `@media (max-width: ${bp}px)`
+  )
+
 export const Bg = styled.div`
     background-color: #2C2C2C;
     position: absolute;
@@ -18,6 +23,9 @@ export const Bg = styled.div`
     left: 0;
     display: flex;
     padding-bottom: 200px;
+    ${mq[1]} {
+        display: block;
+    }
 `
 export const Container = styled.div`
     width: 200px;
@@ -25,6 +33,10 @@ export const Container = styled.div`
     position: relative;
     top: 100px;
     left: 400px;
+    ${mq[1]} {
+        top: 0px;
+        left: 0px;
+    }
 `
 export const Collection = styled.div`
     width: 200px;
@@ -33,6 +45,10 @@ export const Collection = styled.div`
     left: 200px;
     color: white;
     color: #C5FF0E;
+    ${mq[1]} {
+        top: 0;
+        left: 0;
+    }
 `
 export const CollectionName = styled.h2`
     margin-left: 10px;

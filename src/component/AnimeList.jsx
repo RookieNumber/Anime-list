@@ -5,14 +5,37 @@ import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+const Breakpoints = [576, 768, 992, 1200, 2000]
+const mq = Breakpoints.map(
+    bp => `@media (max-width: ${bp}px)`
+  )
+
 const ListAnime = styled.ul`
+    ${mq[1]} {
+        column-count: 1;
+    }
     column-count: 2;
     position: relative;
     left: 0;
 `
 
 const Card = styled.li`
-    width: 600px;
+    ${mq[4]} {
+        width: 600px;
+        background-color: black;
+    }
+
+    // ${mq[3]} {
+    //     width: 500px;
+    //     background-color: red;
+    // }
+
+    ${mq[1]} {
+        width: 300px;
+        height: auto;
+        display: block;
+    }
+    width: 300px;
     background-color: black;
     font-size: 24px;
     left: 0;
@@ -27,10 +50,11 @@ const Banner = styled.img`
     position: relative;
     right: 0;
     width: 100px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
     border: 3px solid #C5FF0E;
+    ${mq[1]} {
+        width: 200px;
+        margin: 0;
+    }
 `
 const Title = styled.h1`
     color: #C5FF0E;
@@ -39,24 +63,46 @@ const Title = styled.h1`
     margin-left: 10px;
     position: relative;
     position: left;
+    ${mq[1]} {
+        margin-top: 0;
+        font-size: 17px;
+        text-align: center;
+    }
 `
-const Genres = styled.div`
-    width: auto;
-    position: relative;
-    left: 0;     
-    margin-left: 10px;
-`
+
 const Txt = styled.div`
     position: relative;
     left: 0;
     margin-top: 20px;
+    ${mq[1]} {
+        margin-top: 0px;
+        display: block;
+        height: max-content;
+    }
 `
 const Bnr = styled.div`
-    padding: 20px;
-    width: 100px;
+    width: auto;
+    padding: 30px;
+    ${mq[1]} {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+`
+const Genres = styled.ul`
+    width: auto;
+    position: relative;
+    left: 0;     
+    margin-left: 10px;
+    ${mq[1]} {
+        column-count: 2;
+        item-align: center;
+        width: min-content;
+        padding-bottom: 10px;
+        text-align: center;
+    }
 `
 
-const Node = styled.div`
+const Node = styled.li`
     background-color: green;
     display: inline;
     border-radius: 5px;
@@ -66,9 +112,11 @@ const Node = styled.div`
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-left: 10px;
     font-size: 15px;
     color: white;
+    ${mq[1]} {
+        display: inline-block;
+    }
 `
 const Button = styled.button`
     background-color: black;
@@ -95,6 +143,11 @@ const BtnContainer = styled.div`
     display: flex;
     position: relative;
     left: -80px;
+    ${mq[1]} {
+        position: relative;
+        left: 70px;
+
+    }
 `
 
 
@@ -112,13 +165,6 @@ const AnimeList = () => {
       if (error) {
         return <div>{error.message}</div>
       }
-
-    // useEffect(() => {
-    //     if (data) {   
-    //         console.log(data.Page)
-    //         setList(data.Page.media)   
-    //     }
-    //   }, [data])
 
     console.log(page)
 
